@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 from llm_handler import get_llm_response
 import os
 
-api = Blueprint("api", name)
+api = Blueprint("api", __name__)
 
 UPLOAD_FOLDER = "uploads/"
 DEFAULT_MODEL = "mistralai/mistral-7b-instruct"
