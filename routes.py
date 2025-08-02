@@ -4,7 +4,6 @@ from llm_handler import get_llm_response
 import os
 
 api = Blueprint("api", __name__)
-
 UPLOAD_FOLDER = "uploads/"
 DEFAULT_MODEL = "mistralai/mistral-7b-instruct"
 
@@ -16,7 +15,6 @@ def api_query():
     query = request.form.get("query")
     file = request.files.get("document")
 
-    # If a new file is uploaded, store it and save path in session
     if file and file.filename:
         filename = secure_filename(file.filename)
         filepath = os.path.join(UPLOAD_FOLDER, filename)
@@ -29,7 +27,6 @@ def api_query():
     if not filepath:
         return jsonify({"error": "No file uploaded"}), 400
 
-    # Call LLM response
     answer = get_llm_response(query, filepath, DEFAULT_MODEL)
     return jsonify({
         "query": query,
