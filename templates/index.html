@@ -1,29 +1,29 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>LLM Query Chat</title> <style> :root { --bg-light: linear-gradient(to right, #ece9e6, #ffffff); --bg-dark: #121212; --text-light: #333; --text-dark: #e0e0e0; --card-bg-dark: #1e1e1e; }
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>LLM Query Chat</title> <style> :root { --bg-light: linear-gradient(to right, #f8f9fa, #ffffff); --bg-dark: #000000; --text-light: #333; --text-dark: #f0f0f0; --card-bg-dark: #1a1a1a; }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background: var(--bg-light);
-  color: var(--text-light);
+  background: var(--bg-dark);
+  color: var(--text-dark);
   transition: background 0.3s, color 0.3s;
 }
 
-body.dark-mode {
-  background: var(--bg-dark);
-  color: var(--text-dark);
+body.light-mode {
+  background: var(--bg-light);
+  color: var(--text-light);
 }
 
 .navbar {
-  background-color: #007BFF;
-  padding: 10px 20px;
+  background: linear-gradient(to right, #111, #222, #111);
+  padding: 12px 20px;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   font-size: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .top-buttons {
@@ -35,7 +35,7 @@ body.dark-mode {
 }
 
 .top-buttons button {
-  background: linear-gradient(135deg, #6c757d, #343a40);
+  background: linear-gradient(135deg, #6a11cb, #2575fc, #43e97b);
   border: none;
   padding: 6px 10px;
   color: white;
@@ -46,8 +46,12 @@ body.dark-mode {
   transition: transform 0.2s ease;
 }
 
-.top-buttons .logout-btn {
-  background: linear-gradient(135deg, #dc3545, #a71d2a);
+.top-buttons button:hover {
+  transform: scale(1.08);
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, #e53935, #d32f2f, #c62828);
 }
 
 .main-wrapper {
@@ -59,14 +63,14 @@ body.dark-mode {
 
 .container {
   flex: 2;
-  background: #ffffff;
+  background: #111;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-body.dark-mode .container {
-  background: var(--card-bg-dark);
+body.light-mode .container {
+  background: #fff;
 }
 
 .suggestions {
@@ -79,13 +83,14 @@ body.dark-mode .container {
 
 .suggestions button {
   padding: 10px;
-  background: linear-gradient(135deg, #17a2b8, #138496);
-  color: white;
+  background: linear-gradient(135deg, #00c9ff, #92fe9d, #00c9ff);
+  color: #000;
+  font-weight: bold;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   text-align: left;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
 }
 
@@ -97,7 +102,7 @@ label {
   font-weight: 600;
 }
 
-input[type="file"], input[type="text"], input[type="email"], input[type="password"], button {
+input[type="file"], input[type="text"], button {
   display: block;
   width: 100%;
   margin: 12px 0;
@@ -105,12 +110,12 @@ input[type="file"], input[type="text"], input[type="email"], input[type="passwor
   font-size: 15px;
   border-radius: 6px;
   border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 button {
-  background: linear-gradient(135deg, #007BFF, #0056b3);
-  color: #ffffff;
+  background: linear-gradient(135deg, #007BFF, #00c6ff, #007BFF);
+  color: white;
   font-weight: bold;
   border: none;
   cursor: pointer;
@@ -119,12 +124,11 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(135deg, #0056b3, #003d80);
   transform: scale(1.05);
 }
 
 .clear-btn {
-  background: linear-gradient(135deg, #dc3545, #a71d2a);
+  background: linear-gradient(135deg, #e53935, #ff1744, #e53935);
 }
 
 .voice-btn {
@@ -146,39 +150,37 @@ button:hover {
   padding: 12px 16px;
   margin: 10px 0;
   border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   clear: both;
   line-height: 1.5;
 }
 
 .user {
-  background-color: #e0f3ff;
+  background-color: #1e88e5;
+  color: white;
   margin-left: auto;
   text-align: right;
 }
 
 .assistant {
-  background-color: #f0f0f0;
+  background-color: #eeeeee;
+  color: #000;
   margin-right: auto;
   text-align: left;
 }
 
-.dark-mode .user {
-  background-color: #154360;
-  color: white;
+.light-mode .assistant {
+  background-color: #f0f0f0;
 }
 
-.dark-mode .assistant {
-  background-color: #333;
-  color: white;
+.light-mode .user {
+  background-color: #007bff;
 }
-</style> </head> <body> <div class="navbar"> <div>LLM Document Query Chat</div> <div class="top-buttons"> <form method="GET" action="/logout" style="margin:0;"> <button type="submit" class="logout-btn">Logout</button> </form> <button onclick="toggleDarkMode()">🌙</button> </div> </div>
+</style> </head> <body class="dark-mode"> <div class="navbar"> <div>LLM Document Query Chat</div> <div class="top-buttons"> <form method="GET" action="/logout" style="margin:0;"> <button type="submit" class="logout-btn">Logout</button> </form> <button onclick="toggleDarkMode()">🌙</button> </div> </div>
 {% if not session.logged_in %}
-
 <!-- login/signup section -->
 {% else %}
-<div class="main-wrapper"> <div class="container" ondragover="event.preventDefault()" ondrop="handleDrop(event)"> <form method="POST" action="/chat" enctype="multipart/form-data" id="queryForm"> <label for="document">Upload a document (.pdf, .txt, .docx, .eml):</label> <input type="file" id="document" name="document" accept=".pdf,.txt,.docx,.eml" required>
-
+<div class="main-wrapper"> <div class="container" ondragover="event.preventDefault()" ondrop="handleDrop(event)"> <form method="POST" action="/chat" enctype="multipart/form-data" id="queryForm"> <label for="document">Upload a document (.pdf, .txt, .docx, .eml, blob):</label> <input type="file" id="document" name="document" accept=".pdf,.txt,.docx,.eml" required>
     <label for="query">Enter your query:</label>
     <div style="display: flex; align-items: center;">
       <input type="text" id="query" name="query" placeholder="Ask something..." required style="flex: 1;">
@@ -187,7 +189,6 @@ button:hover {
 
     <button type="submit">Send</button>
   </form>
-
   <form method="POST" action="/clear">
     <button class="clear-btn" type="submit">Clear Chat</button>
   </form>
@@ -209,4 +210,4 @@ button:hover {
   <button type="button" onclick="useSuggestion('Summarize the timeline of events.')">🕒 Timeline</button>
   <button type="button" onclick="useSuggestion('What decisions were made in this document?')">📄 Decisions</button>
 </div>
-</div> {% endif %} <script> function startDictation() { if (!('webkitSpeechRecognition' in window)) { alert("Your browser doesn't support speech recognition."); return; } const recognition = new webkitSpeechRecognition(); recognition.lang = "en-US"; recognition.continuous = false; recognition.interimResults = false; recognition.onresult = function(event) { document.getElementById('query').value = event.results[0][0].transcript; }; recognition.onerror = function() { alert("Speech recognition failed. Try again."); }; recognition.start(); } function toggleDarkMode() { document.body.classList.toggle('dark-mode'); } function handleDrop(event) { event.preventDefault(); const fileInput = document.getElementById("document"); fileInput.files = event.dataTransfer.files; } function useSuggestion(text) { document.getElementById("query").value = text; } </script> </body> </html>
+</div> {% endif %} <script> function toggleDarkMode() { document.body.classList.toggle('light-mode'); } function startDictation() { if (!('webkitSpeechRecognition' in window)) { alert("Your browser doesn't support speech recognition."); return; } const recognition = new webkitSpeechRecognition(); recognition.lang = "en-US"; recognition.continuous = false; recognition.interimResults = false; recognition.onresult = function(event) { document.getElementById('query').value = event.results[0][0].transcript; }; recognition.onerror = function() { alert("Speech recognition failed. Try again."); }; recognition.start(); } function handleDrop(event) { event.preventDefault(); const dataTransfer = event.dataTransfer; if (dataTransfer.items) { for (let i = 0; i < dataTransfer.items.length; i++) { if (dataTransfer.items[i].kind === 'file') { const file = dataTransfer.items[i].getAsFile(); const dt = new DataTransfer(); dt.items.add(file); document.getElementById("document").files = dt.files; } } } } function useSuggestion(text) { document.getElementById("query").value = text; } </script> </body> </html>
