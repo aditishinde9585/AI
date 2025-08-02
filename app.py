@@ -4,7 +4,7 @@ import os
 from routes import api
 from llm_handler import get_llm_response
 
-app = Flask(name)
+app = Flask(__name__)
 app.secret_key = "your_secret_key"
 
 # Register blueprint
@@ -63,6 +63,6 @@ def logout():
     return redirect(url_for("auth"))
 
 # Required for Render or cloud deployment (host="0.0.0.0", port from env)
-if name == "main":
+if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # PORT environment variable on Render
     app.run(host="0.0.0.0", port=port, debug=True)
