@@ -4,18 +4,19 @@ import os
 from routes import api
 from llm_handler import get_llm_response
 
-app = Flask(__name__)
+app = Flask(name)
 app.secret_key = "your_secret_key"
 
 # Register blueprint
 app.register_blueprint(api)
 
+# Upload folder setup
 UPLOAD_FOLDER = "uploads/"
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 chat_history = []
-users = {}
+users = {}  # In-memory user store
 
 @app.route("/")
 def home():
@@ -47,13 +48,13 @@ def auth():
         users[email] = password
         session["logged_in"] = True
         return redirect(url_for("home"))
-    
+
     elif mode == "login":
         if users.get(email) == password:
             session["logged_in"] = True
             return redirect(url_for("home"))
         return render_template("login.html", error="Invalid credentials.")
-    
+
     return render_template("login.html", error="Invalid mode.")
 
 @app.route("/logout")
@@ -61,5 +62,7 @@ def logout():
     session.pop("logged_in", None)
     return redirect(url_for("auth"))
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# Required for Render or cloud deployment (host="0.0.0.0", port from env)
+if name == "main":
+    port = int(os.environ.get("PORT", 5000))  # PORT environment variable on Render
+    app.run(host="0.0.0.0", port=port, debug=True)
