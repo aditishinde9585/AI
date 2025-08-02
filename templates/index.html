@@ -1,7 +1,5 @@
 <!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>LLM Query Chat</title> <style> :root { --bg-light: linear-gradient(to right, #ece9e6, #ffffff); --bg-dark: #121212; --text-light: #333; --text-dark: #e0e0e0; --card-bg-dark: #1e1e1e; }
-css
-Copy
-Edit
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -180,9 +178,7 @@ button:hover {
 <!-- login/signup section -->
 {% else %}
 <div class="main-wrapper"> <div class="container" ondragover="event.preventDefault()" ondrop="handleDrop(event)"> <form method="POST" action="/chat" enctype="multipart/form-data" id="queryForm"> <label for="document">Upload a document (.pdf, .txt, .docx, .eml):</label> <input type="file" id="document" name="document" accept=".pdf,.txt,.docx,.eml" required>
-php-template
-Copy
-Edit
+
     <label for="query">Enter your query:</label>
     <div style="display: flex; align-items: center;">
       <input type="text" id="query" name="query" placeholder="Ask something..." required style="flex: 1;">
